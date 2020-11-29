@@ -1,0 +1,19 @@
+version: "3"
+services:
+  system-performance : 
+    image : telegraf
+    environment: 
+      - HOST_ETC:/hostfs/etc 
+      - HOST_PROC:/hostfs/proc
+      - HOST_SYS:/hostfs/sys
+      - HOST_VAR:/hostfs/var
+      - HOST_RUN:/hostfs/run
+      - HOST_MOUNT_PREFIX:/hostfs
+    volumes: 
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro 
+      - /:/hostfs:ro
+    networks: 
+      - monitoring
+      
+networks:
+  monitoring:
